@@ -2,4 +2,7 @@ const express = require('express');
 const User = require('../models/user');
 const router = express.Router()
 
-router.post('/')
+router.post('/',(req, res) => {
+})
+
+module.export = router
