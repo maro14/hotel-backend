@@ -17,8 +17,11 @@ app.get('/',(req, res) => {
 
 dbConnect()
 
+const userRouter = require('./routes/user')
+
+app.use('/', userRouter);
 const PORT = process.env.PORT || 5000
 
 app.listen(PORT, () => {
-    console.log(`SErver on ${PORT}`);
+    console.log(`Server on ${PORT}`);
 })

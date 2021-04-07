@@ -3,9 +3,10 @@ const mongoose = require('mongoose');
 
 const dbconnect =(req, res) => {
 
-    const db = mongoose.connect('', {
-        useCreateIndex: true,
-        useFindAndModify: true
+    const db = mongoose.connect(process.env.MONGO_URI, {
+        useUnifiedTopology: true,
+        useFindAndModify: true,
+        useNewUrlParser: true
     })
     db.then(() => {
         console.log('Database connect');
