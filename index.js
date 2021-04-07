@@ -1,6 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
+const dbConnect = require('./database/mongodb');
 require('dotenv').config()
 
 const app = express()
@@ -13,6 +14,8 @@ app.get('/',(req, res) => {
         msg: 'ok'
     })
 })
+
+dbConnect()
 
 const PORT = process.env.PORT || 5000
 
