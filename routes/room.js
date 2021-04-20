@@ -19,12 +19,13 @@ router.get('/rooms', (req, res) => {
     })
 })
 
-router.post('/rooms', (req, res) => {
+router.post('/room', (req, res) => {
     const room = new Room({
         _id: mongoose.Types.ObjectId(),
         title: req.body.title
     })
-    room.save().then(create => {
+    room.save()
+    .then(create => {
         res.status(201).json({
             success: true,
             message: 'room created',
