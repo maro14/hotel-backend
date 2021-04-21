@@ -11,6 +11,7 @@ app.use(morgan('dev'))
 app.use(cors())
 app.use(helmet())
 
+
 app.get('/',(req, res) => {
     res.json({
         msg: 'OK'
@@ -20,8 +21,11 @@ app.get('/',(req, res) => {
 dbConnect()
 
 const userRouter = require('./routes/user')
+const roomRouter = require('./routes/room')
 
-app.use('/', userRouter);
+app.use('/user', userRouter)
+app.use('/room', roomRouter)
+
 const PORT = process.env.PORT || 5000
 
 app.listen(PORT, () => {

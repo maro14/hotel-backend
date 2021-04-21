@@ -4,10 +4,10 @@ const Room = require('../models/room');
 
 const router = express.Router()
 
-router.get('/rooms', (req, res) => {
-    const rooms = Room.find({})
+router.get('/rooms', (req, res, next) => {
+    const rooms = Room.find().select('title _id ')
     rooms.then(docs => {
-        res.send(200).json({
+        res.status(200).json({
             success: true,
             data: docs
         })
@@ -19,9 +19,9 @@ router.get('/rooms', (req, res) => {
     })
 })
 
-router.post('/room', (req, res) => {
+router.post('/add/room', (req, res) => {
     const room = new Room({
-        _id: mongoose.Types.ObjectId(),
+        _id: new mongoose.Types.ObjectId(),
         title: req.body.title
     })
     room.save()
@@ -38,3 +38,5 @@ router.post('/room', (req, res) => {
         })
     })
 })
+
+module.exports = router
