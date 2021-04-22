@@ -4,7 +4,7 @@ const Room = require('../models/room');
 
 const router = express.Router()
 
-router.get('/rooms', (req, res, next) => {
+router.get('/live/rooms', (req, res, next) => {
     const rooms = Room.find().select('title _id ')
     rooms.then(docs => {
         res.status(200).json({

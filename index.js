@@ -22,9 +22,11 @@ dbConnect()
 
 const userRouter = require('./routes/user')
 const roomRouter = require('./routes/room')
+const bookRouter = require('./routes/booking')
 
 app.use('/user', userRouter)
 app.use('/room', roomRouter)
+app.use('/book', bookRouter)
 
 const PORT = process.env.PORT || 5000
 
