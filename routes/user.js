@@ -6,7 +6,7 @@ const User = require('../models/user');
 const mongoose = require('mongoose');
 const router = express.Router()
 
-router.post('/',
+router.post('/register',
     [
         check('name', 'Name is required')
         .not()
@@ -16,14 +16,14 @@ router.post('/',
     ],async(req, res) => {
         const errors = validationResult(req)
 
-        if (!errors.isEmpty) {
+        if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() })
         }
 
         const { _id ,name, email, password, booking } = req.body
 
         try {
-            let user = User.findOne({ email })
+            let user = await User.findOne({ email })
             if (user) {
                 return res.status(400).json({
                     msg: 'User already exists'
