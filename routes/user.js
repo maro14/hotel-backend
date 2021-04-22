@@ -1,8 +1,9 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const { check, validationResult} = require('express-validator')
+const { check, validationResult } = require('express-validator')
 const User = require('../models/user');
+const mongoose = require('mongoose');
 const router = express.Router()
 
 router.post('/',
@@ -19,7 +20,7 @@ router.post('/',
             return res.status(400).json({ errors: errors.array() })
         }
 
-        const { name, email, password } = req.body
+        const { _id ,name, email, password, booking } = req.body
 
         try {
             let user = User.findOne({ email })
@@ -30,9 +31,11 @@ router.post('/',
             }
 
             user = new User({
+                _id: new mongoose.Types.ObjectId(),
                 name,
                 email,
-                password
+                password,
+                booking
             })
 
             const salt = await bcrypt.genSalt(10)
