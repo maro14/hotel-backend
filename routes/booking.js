@@ -28,7 +28,68 @@ router.get('/live', auth, async(req, res) => {
 
     }).catch(err => {
         res.status(400).json({
-            data: err
+            error: err
+        })
+    })
+})
+
+router.post('/book', async(req, res) => {
+    const booking = await Booking.find({ user: req.userId })
+    booking.then(docs => {
+        if (docs.length >= 1) {
+            const newDate = Date().toString().split('', 4).join('-')
+            const oldDate = docs.map(doc => { return {pp: doc.createAt }})
+            const prp = oldDate[0].pp
+            if (newDate === prp) {
+                return res.status(200).json({
+                    message: 'daily limit reached'
+                })
+            } else {
+                var createdAt = ""
+                const book = new Booking({
+                    _id: new mongoose.Types.ObjectId(),
+                    room: req.body.roomId,
+                    user: req.userId,
+                    createdAt: Date().toString().split(' ', 4).join('-')
+                })
+                book.save().then(result => {
+                    return User.findById(req.userId)
+                }).then(user => {
+                    res.status(201).json({
+                        message: 'Booking successful'
+                    })
+                }).catch(err => {
+                    console.log(err);
+                })
+
+                const hook = new Hooking({
+                    _id: mongoose.Types.ObjectId(),
+                    room: req.body.roomId,
+                    user: req.userId
+                })
+                hook.save()
+            }
+        } else {
+            var createdAt = ""
+            const book = new Booking({
+                _id: new mongoose.Types.ObjectId(),
+                room: req.body.roomId,
+                user: req.userId,
+                createdAt: Date().toString().split(' ', 4).join('-')
+            })
+            book.save().then(result => {
+                return User.findById(req.userId)
+            }).then(user => {
+                res.status(201).json({
+                    message: 'Booking successful'
+                })
+            }).catch(err => {
+                console.log(err);
+            })
+        }
+    }).catch(err => {
+        res.status(500).json({
+            error: err
         })
     })
 })
@@ -48,7 +109,7 @@ router.get('/yourbookings', auth, async(req, res) => {
     })
     .catch(err => {
         res.status(400).json({
-            data: err
+            error: err
         })
     })
 })

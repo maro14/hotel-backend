@@ -19,7 +19,7 @@ router.get('/live/rooms', (req, res, next) => {
     })
 })
 
-router.post('/add/room', (req, res) => {
+router.post('/add/room', (req, res, next) => {
     const room = new Room({
         _id: new mongoose.Types.ObjectId(),
         title: req.body.title
