@@ -33,7 +33,7 @@ router.get('/live', auth, async(req, res) => {
     })
 })
 
-router.post('/book', async(req, res) => {
+router.post('/book', auth, async(req, res) => {
     const booking = await Booking.find({ user: req.userId })
     booking.then(docs => {
         if (docs.length >= 1) {
@@ -45,7 +45,7 @@ router.post('/book', async(req, res) => {
                     message: 'daily limit reached'
                 })
             } else {
-                var createdAt = ""
+                let createdAt = ""
                 const book = new Booking({
                     _id: new mongoose.Types.ObjectId(),
                     room: req.body.roomId,
@@ -53,7 +53,7 @@ router.post('/book', async(req, res) => {
                     createdAt: Date().toString().split(' ', 4).join('-')
                 })
                 book.save().then(result => {
-                    return User.findById(req.userId)
+                    return await User.findById(req.userId)
                 }).then(user => {
                     res.status(201).json({
                         message: 'Booking successful'
@@ -70,7 +70,7 @@ router.post('/book', async(req, res) => {
                 hook.save()
             }
         } else {
-            var createdAt = ""
+            let createdAt = ""
             const book = new Booking({
                 _id: new mongoose.Types.ObjectId(),
                 room: req.body.roomId,
@@ -86,6 +86,12 @@ router.post('/book', async(req, res) => {
             }).catch(err => {
                 console.log(err);
             })
+            const hook = new Hooking({
+                _id: mongoose.Types.ObjectId(),
+                room: req.boody.roomId,
+                user: req.userId
+            })
+            hook.save()
         }
     }).catch(err => {
         res.status(500).json({

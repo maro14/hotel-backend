@@ -5,8 +5,10 @@ const User = require('../models/user');
 
 router.get('/', async(req, res) => {
     try {
-        const user = User.findById(req.userId).select('-password')
-        res.json(user)
+        const user = await User.findById(req.user._id).select('-password')
+        res.json({
+            data: user
+        })
     } catch (err) {
         res.status(500).json({
             error: err
