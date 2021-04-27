@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2')
 
 const roomSchema = new mongoose.Schema({
     _id: mongoose.Types.ObjectId,
@@ -8,6 +9,8 @@ const roomSchema = new mongoose.Schema({
         required: true
     }
 })
+
+roomSchema.plugin(mongoosePaginate)
 
 const Room = mongoose.model('rooms', roomSchema)
 
