@@ -1,3 +1,4 @@
+
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
@@ -29,8 +30,11 @@ app.use("/room", roomRouter);
 app.use("/book", bookRouter);
 //app.use('/auth', authRouter)
 
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-  console.log(`Server on ${PORT}`);
-});
+
+    console.log(`Server on ${PORT}`);
+})
+
