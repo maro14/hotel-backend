@@ -23,12 +23,12 @@ dbConnect()
 const userRouter = require('./routes/user')
 const roomRouter = require('./routes/room')
 const bookRouter = require('./routes/booking')
-//const authRouter = require('./routes/auth')
+const authRouter = require('./routes/auth')
 
 app.use('/user', userRouter)
 app.use('/room', roomRouter)
 app.use('/book', bookRouter)
-//app.use('/auth', authRouter)
+app.use('/auth', authRouter)
 
 const PORT = process.env.PORT || 5000
 
