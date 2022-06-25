@@ -1,11 +1,11 @@
 const jwt = require("jsonwebtoken");
 
 const verifyToken = (req, res, next) => {
-  const token = req.headers["x-auth-token"];
+  const token = req.headers("auth");
 
   if (!token) {
     res.status(401).json({
-      msg: "No token, autherization deenied",
+      msg: "No token, autherization denied",
     });
   }
 
