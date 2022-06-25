@@ -8,7 +8,7 @@ const User = require('../models/user');
 
 
 router.get('/live', auth, async(req, res) => {
-    const hookings = await Hooking.find({ id: userId })
+    const hookings = await Hooking.find({ id: req.userId })
     hookings.then(docs => {
         if (docs.length <= 0) {
             return res.status(200).json({

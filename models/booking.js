@@ -1,8 +1,10 @@
 const mongoose = require("mongoose");
 
-const bookingSchema = mongoose.Schema({
+const bookingSchema = new mongoose.Schema({
   _id: mongoose.Types.ObjectId,
-  createAt: String,
+  createAt: {
+    type: String
+  },
   room: {
     type: mongoose.Types.ObjectId,
     ref: "rooms",
