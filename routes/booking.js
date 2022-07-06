@@ -53,7 +53,7 @@ router.post('/book', auth, async(req, res) => {
                     createdAt: Date().toString().split(' ', 4).join('-')
                 })
                 book.save().then(result => {
-                    return await User.findById(req.userId)
+                    return User.findById(req.userId)
                 }).then(user => {
                     res.status(201).json({
                         message: 'Booking successful'
