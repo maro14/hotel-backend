@@ -1,7 +1,7 @@
 # Hotel API
- create node.js app for building booking hotel RESTful API using Express 
+#### create nodejs app for build booking hotel REST API 
 
-### For booking room hotel
+
 
 ### Install
 
@@ -14,3 +14,7 @@ yarn install
 ```
 yarn dev
 ```
+
+## Dependencies
+* Express
+* Mongodb
