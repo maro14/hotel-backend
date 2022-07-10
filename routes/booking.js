@@ -1,9 +1,9 @@
-const express = require('express')
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
 const mongoose = require('mongoose');
 const auth = require('../middleware/auth');
-const Booking = require('../models/booking')
-const Hooking = require('../models/hooking')
+const Booking = require('../models/booking');
+const Hooking = require('../models/hooking');
 const User = require('../models/user');
 
 
