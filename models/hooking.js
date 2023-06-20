@@ -1,13 +1,14 @@
 const mongoose = require("mongoose");
 
+
 const borderSchema = new mongoose.Schema({
-  _id: mongoose.Types.ObjectId,
+  _id: mongoose.Schema.Types.ObjectId,
   user: {
-    type: mongoose.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "users",
   },
   room: {
-    type: mongoose.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "rooms",
   },
   createAt: {

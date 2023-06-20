@@ -1,16 +1,16 @@
 const mongoose = require("mongoose");
 
 const bookingSchema = new mongoose.Schema({
-  _id: mongoose.Types.ObjectId,
+  _id: mongoose.Schema.Types.ObjectId,
   createAt: {
     type: String
   },
   room: {
-    type: mongoose.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "rooms",
   },
   user: {
-    type: mongoose.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "users",
   },
 });

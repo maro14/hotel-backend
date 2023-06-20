@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const mongoosePaginate = require("mongoose-paginate-v2");
 
 const roomSchema = new mongoose.Schema({
-  _id: mongoose.Types.ObjectId,
+  _id: mongoose.Schema.Types.ObjectId,
   title: {
     type: String,
     unique: true,
