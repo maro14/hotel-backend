@@ -22,5 +22,5 @@ jobs:
       - name: Install Dependencies
         run: npm install express
 
-      - name: Run start
-        run: npm run start
+      - name: Run development
+        run: npm run dev
