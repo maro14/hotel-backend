@@ -23,7 +23,7 @@ jobs:
         run: npm install express cors dotenv mongoose express-validator helmet jsonwebtoken mongoose-paginate-v2 morgan bcryptjs
         
       - name: Install Development
-        run: npm install nodmon -D
+        run: npm install -d nodemon
         
       - name: Run development
         run: npm run dev
