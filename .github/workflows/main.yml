@@ -7,7 +7,7 @@ on:
 
 jobs:
   test:
-    name: Run Tests
+    name: Run Development
     runs-on: ubuntu-latest
 
     steps:
@@ -20,7 +20,10 @@ jobs:
           node-version: 14
 
       - name: Install Dependencies
-        run: npm install express
-
+        run: npm install express cors dotenv mongoose express-validator helmet jsonwebtoken mongoose-paginate-v2 morgan bcryptjs
+        
+      - name: Install Development
+        run: npm install nodmon -D
+        
       - name: Run development
         run: npm run dev
