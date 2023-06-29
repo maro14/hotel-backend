@@ -21,9 +21,9 @@ jobs:
 
       - name: Install Dependencies
         run: npm install express cors dotenv mongoose express-validator helmet jsonwebtoken mongoose-paginate-v2 morgan bcryptjs
-        
-      - name: Install Development
-        run: npm install -d nodemon
-        
+
+      - name: Install Development Dependencies
+        run: npm install -D nodemon
+
       - name: Run development
-        run: npm run dev
+        run: npx nodemon server.js
