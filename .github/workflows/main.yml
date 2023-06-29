@@ -26,4 +26,4 @@ jobs:
         run: npm install -D nodemon
 
       - name: Run development
-        run: npx nodemon server.js
+        run: npx nodemon index.js
