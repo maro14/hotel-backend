@@ -23,7 +23,7 @@ jobs:
         run: npm install -g yarn
 
       - name: Install Dependencies
-        run: yarn install express cors morgan mongoose express-validator dotenv helmet mongoose-paginate-v2
+        run: yarn add express cors morgan mongoose express-validator dotenv helmet mongoose-paginate-v2
 
       - name: Start Development Server
         run: yarn run dev
