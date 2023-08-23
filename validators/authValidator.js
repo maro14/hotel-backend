@@ -6,4 +6,9 @@ const UserRegisterValidator = [
     check('password').isLength({ min: 6}),
 ]
 
-module.exports = { UserRegisterValidator}
+const userLoginValidator = [
+    check("email", "Email required").isEmail(),
+    check("password", "Password required").exists(),
+  ]
+
+module.exports = { UserRegisterValidator, userLoginValidator}
