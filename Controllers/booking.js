@@ -1,0 +1,63 @@
+const mongoose = require('mongoose');
+const Booking = require('../models/booking');
+const Room = require('../models/room');
+
+// Create a new booking
+const createBooking = (req, res) => {
+    const { userId, roomId } = req.body;
+
+    Room.findById(roomId)
+    .then(room => {
+        if (!room) {
+        return res.status(404).json({
+            success: false,
+            message: 'Room not found'
+        });
+    }
+
+    const booking = new Booking({
+        _id: new mongoose.Types.ObjectId(),
+        userId,
+        roomId
+    });
+    
+    return booking.save();
+    })
+    .then(createdBooking => {
+        res.status(201).json({
+            success: true,
+            message: 'Booking created',
+            data: createdBooking
+        });
+    })
+    .catch(err => {
+        res.status(500).json({
+            success: false,
+            error: err
+        });
+    });
+};
+
+// Get all bookings
+const getAllBookings = (req, res) => {
+    Booking.find()
+    .populate('userId', 'name email')
+    .populate('roomId', 'title')
+    .then(bookings => {
+        res.status(200).json({
+        success: true,
+        data: bookings
+    });
+})
+.catch(err => {
+    res.status(500).json({
+        success: false,
+        error: err
+    });
+})
+};
+
+module.exports = {
+    createBooking,
+    getAllBookings
+};

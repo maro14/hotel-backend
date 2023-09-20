@@ -1,4 +1,5 @@
 const Room = require("../models/room");
+const mongoose = require('mongoose');  
 
 const getAllRooms = (req, res) => {
   Room.find()
