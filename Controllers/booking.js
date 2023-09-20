@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Booking = require('../models/booking');
 const Room = require('../models/room');
 
-// Create a new booking
+
 const createBooking = (req, res) => {
     const { userId, roomId } = req.body;
 
@@ -40,21 +40,22 @@ const createBooking = (req, res) => {
 
 // Get all bookings
 const getAllBookings = (req, res) => {
+    
     Booking.find()
     .populate('userId', 'name email')
     .populate('roomId', 'title')
     .then(bookings => {
-        res.status(200).json({
-        success: true,
-        data: bookings
-    });
-})
-.catch(err => {
-    res.status(500).json({
-        success: false,
-        error: err
-    });
-})
+            res.status(200).json({
+            success: true,
+            data: bookings
+        });
+    })
+    .catch(err => {
+        res.status(500).json({
+            success: false,
+            error: err
+        });
+    })
 };
 
 module.exports = {

@@ -11,15 +11,22 @@ const getAllRooms = (req, res) => {
       });
     })
     .catch(err => {
-      res.status(400).json({
+      res.status(500).json({
         success: false,
-        error: err,
+        error: err.message || 'Internal Server Error',
       });
     });
 };
 
 const addRoom = (req, res) => {
   const { title } = req.body;
+
+  if (!title || typeof title !== 'string') {
+    return res.status(400).json({
+      success: false,
+      message: 'Invalid room title'
+    })
+  }
 
   const room = new Room({
     _id: new mongoose.Types.ObjectId(),
@@ -37,10 +44,11 @@ const addRoom = (req, res) => {
     .catch(err => {
       res.status(400).json({
         success: false,
-        error: err,
+        error: err.message || 'Internal Server Error',
       });
     });
 };
+
 
 module.exports = {
   getAllRooms,
