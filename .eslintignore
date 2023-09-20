@@ -1,0 +1,20 @@
+# Ignore node_modules
+node_modules/
+
+# Ignore build folder
+build/
+
+# Ignore dist folder
+dist/
+
+# Ignore any log files
+*.log
+
+# Ignore coverage folder
+coverage/
+
+# Ignore Dockerfile
+Dockerfile
+
+# Ignore config files
+*.config.js
