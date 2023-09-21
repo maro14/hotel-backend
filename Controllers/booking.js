@@ -4,7 +4,19 @@ const Room = require('../models/room');
 
 
 const createBooking = (req, res) => {
-    const { userId, roomId } = req.body;
+    const { userId, roomId, startDate, endDate } = req.body;
+
+    Booking.findOne({
+        room: roomId,
+        startDate: { $lt: endDate },
+        enddata: { $gt: startDate}
+    }).then(existBooking => {
+        if (existBooking) {
+            return res.status(400).json({
+                message: 'Room is already booked for the specified dates.'
+            })
+        }
+    })
 
     Room.findById(roomId)
     .then(room => {
