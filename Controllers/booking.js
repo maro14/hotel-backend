@@ -70,7 +70,24 @@ const getAllBookings = (req, res) => {
     })
 };
 
+const cancelBooking = (req, res) => {
+
+    const bookingId = req.params.bookingId;
+    
+    Booking.findByIdAndRemove(bookingId)
+    .then(result => {
+        if (!result) {
+            return res.status(404).json({ message: 'Booking not found'})
+        }
+        res.status(200).json({ message: 'Booking cancelled successsfully'})
+    })
+    .catch(err => {
+        res.status(500).json({ error: err.message })
+    })
+}
+
 module.exports = {
     createBooking,
-    getAllBookings
+    getAllBookings,
+    cancelBooking
 };

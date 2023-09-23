@@ -4,7 +4,7 @@ const auth = require('../middleware/auth');
 
 const router = express.Router();
 
-router.get('/live/rooms', getAllRooms)
-router.post('/add/room', auth, addRoom)
+router.get('/live', getAllRooms)
+router.post('/add', auth, addRoom)
 
 module.exports = router;
