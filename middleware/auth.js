@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const verifyToken = (req, res, next) => {
+const auth = (req, res, next) => {
   const token = req.headers("auth")
 
   if (!token) {
@@ -9,17 +9,22 @@ const verifyToken = (req, res, next) => {
     });
   }
 
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.userId = decoded.userId;
-    next();
-  } catch (error) {
-    res.status(401)
-      .json({
-      message: "Token is not valid" ,
-      data: error
-    });
-  }
+  new Promise((resolve, reject) => {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+    if (decoded) {
+      resolve(decoded)
+    } else {
+      reject(new Error("Token verification failed"))
+    }
+  })
+  .then(decoded => {
+    req.userId = decoded.userId
+  })
+  .catch(error => {
+    return res.status(401).json({
+      message: "Token is not valid", error
+    })
+  })
 };
 
-module.exports = verifyToken;
+module.exports = uath;
