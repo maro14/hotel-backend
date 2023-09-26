@@ -19,6 +19,7 @@ const auth = (req, res, next) => {
   })
   .then(decoded => {
     req.userId = decoded.userId
+    next()
   })
   .catch(error => {
     return res.status(401).json({
@@ -27,4 +28,4 @@ const auth = (req, res, next) => {
   })
 };
 
-module.exports = uath;
+module.exports = auth;
