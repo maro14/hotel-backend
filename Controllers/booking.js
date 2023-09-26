@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const Booking = require('../models/booking');
 const Room = require('../models/room');
 
@@ -28,7 +27,6 @@ const createBooking = (req, res) => {
     }
 
     const booking = new Booking({
-        _id: new mongoose.Types.ObjectId(),
         userId,
         roomId
     });

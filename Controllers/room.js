@@ -1,9 +1,9 @@
 const Room = require("../models/room");
-const mongoose = require('mongoose');  
+
 
 const getAllRooms = (req, res) => {
   Room.find()
-    .select("title _id")
+    .select("title")
     .then(rooms => {
       res.status(200).json({
         success: true,
@@ -29,7 +29,6 @@ const addRoom = (req, res) => {
   }
 
   const room = new Room({
-    _id: new mongoose.Types.ObjectId(),
     title: title,
   });
 
@@ -42,7 +41,7 @@ const addRoom = (req, res) => {
       });
     })
     .catch(err => {
-      res.status(400).json({
+      res.status(500).json({
         success: false,
         error: err.message || 'Internal Server Error',
       });
